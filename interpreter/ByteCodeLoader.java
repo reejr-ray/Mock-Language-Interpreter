@@ -4,7 +4,7 @@ package interpreter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.StringTokenizer;
 
 public class ByteCodeLoader extends Object {
 
@@ -28,6 +28,14 @@ public class ByteCodeLoader extends Object {
      *      the newly created ByteCode instance via the init function.
      */
     public Program loadCodes() {
-       return null;
+        String line = byteSource.readLine();
+        while (line != null) { // until EOF
+            String[] args = line.split("\\s+");
+
+            // load the code
+
+            line = byteSource.readLine();
+        }
+        return null; // remove once loadcodes is programmed
     }
 }

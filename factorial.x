@@ -7,3 +7,5 @@ program {
   }
   write(factorial(read()))
 }
+
+// .x files are irrelevant for coding, only use for reference
