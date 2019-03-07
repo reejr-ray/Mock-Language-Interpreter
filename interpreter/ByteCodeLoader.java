@@ -1,10 +1,13 @@
 
 package interpreter;
 
+import interpreter.bytecode.ByteCode;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 public class ByteCodeLoader extends Object {
 
@@ -28,14 +31,50 @@ public class ByteCodeLoader extends Object {
      *      the newly created ByteCode instance via the init function.
      */
     public Program loadCodes() {
-        String line = byteSource.readLine();
-        while (line != null) { // until EOF
-            String[] args = line.split("\\s+");
+        try {
+            String line = byteSource.readLine();
+            ArrayList<ByteCode> instructions = new ArrayList<>();
+            while (line != null) { // until EOF
+                String[] args = line.split("\\s+");
+                try {
 
-            // load the code
+                    String className = CodeTable.getClassName(args[0]);
+                    Class c = Class.forName("interpreter.bytecode." + className);
+                    ByteCode bCode = (ByteCode) c.getDeclaredConstructor().newInstance();
 
-            line = byteSource.readLine();
+                    // create arraylist of remaining arguments
+                    ArrayList<String> arglist = new ArrayList<>();
+                    for(int i = 1; i < args.length; i++){
+                        arglist.add(args[i]);
+                    }
+
+                    // initialize the bytecode with the arguments
+                    bCode.init(arglist);
+                    // add each initialized bytecode into an arraylist for passing to program
+                    instructions.add(bCode);
+
+                    /** ---------------- IMPORTANT TODO -------------------------
+                     * with the initialized bytecode, put it into the program
+                     */
+
+                } catch (ClassNotFoundException cnf) {
+                    System.out.println(" No such class exists for code " + args[0] + ". ");
+                } catch (NoSuchMethodException nsm) {
+                    System.out.println(" No such method exception. error at " + args[0] + ". ");
+                } catch (InstantiationException ins) {
+                     System.out.println(" Exception generated at instantiation of bytecode " + args[0] + ". ");
+                } catch (IllegalAccessException iacess){
+                    System.out.println(" Illegal access when creating bytecode " + args[0] + ". ");
+                } catch (InvocationTargetException invtarg) {
+                    System.out.println("Invocation Target invalid at bytecode " + args[0] + ". ");
+                }
+                // keeps while loop running until no more lines are able to be read
+                line = byteSource.readLine();
+            }
+        } catch (IOException ie) {
+            ie.printStackTrace();
         }
+
         return null; // remove once loadcodes is programmed
     }
 }
