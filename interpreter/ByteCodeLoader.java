@@ -31,9 +31,11 @@ public class ByteCodeLoader extends Object {
      *      the newly created ByteCode instance via the init function.
      */
     public Program loadCodes() {
+        Program program = new Program();
         try {
+
             String line = byteSource.readLine();
-            ArrayList<ByteCode> instructions = new ArrayList<>();
+            // ArrayList<ByteCode> instructions = new ArrayList<>();
             while (line != null) { // until EOF
                 String[] args = line.split("\\s+");
                 try {
@@ -49,9 +51,14 @@ public class ByteCodeLoader extends Object {
                     }
 
                     // initialize the bytecode with the arguments
-                    bCode.init(arglist);
+                    String bCodeName = args[0];
+                    bCode.init(arglist, bCodeName);
+
+                    // add initialized bytecode into the program
+                    program.addByteCode(bCode);
+
                     // add each initialized bytecode into an arraylist for passing to program
-                    instructions.add(bCode);
+                    // instructions.add(bCode);
 
                     /** ---------------- IMPORTANT TODO -------------------------
                      * with the initialized bytecode, put it into the program
@@ -71,10 +78,12 @@ public class ByteCodeLoader extends Object {
                 // keeps while loop running until no more lines are able to be read
                 line = byteSource.readLine();
             }
+
         } catch (IOException ie) {
             ie.printStackTrace();
         }
 
-        return null; // remove once loadcodes is programmed
+        program.resolveAddrs();
+        return program; // remove once loadcodes is programmed
     }
 }

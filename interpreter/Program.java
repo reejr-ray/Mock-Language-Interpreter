@@ -19,6 +19,8 @@ public class Program {
         return this.program.size();
     }
 
+    public void addByteCode(ByteCode code){ this.program.add(code); }
+
     /**
      * This function should go through the program and resolve all addresses.
      * Currently all labels look like LABEL <<num>>>, these need to be converted into
@@ -29,9 +31,31 @@ public class Program {
      */
     public void resolveAddrs() {
 
+        // scan through program and look for labels
+        // take note of the location of the label
+        // if the bytecode is a label, scan through program again and look for the same string that is "labeled"
+        // anything that has an argument that is the same as what is "labeled", replace that string with the location of label
+        if(!program.isEmpty()) {
+            for (int i = 0; i <= program.size(); i++) {
+                if (program.get(i).getName().equals("LABEL")) {
+
+                    int location = i;
+                    ArrayList<String> args1 = program.get(i).getArgs();
+                    String label = args1.get(0);
+                    for (ByteCode code2 : program) {
+                        String name2 = code2.getName(); // saves 2 getName() calls per iteration
+                        if(name2.equals("FALSEBRANCH") ||
+                                name2.equals("GOTO") ||
+                                name2.equals("CALL")){
+                            ArrayList<String> args2 = code2.getArgs();
+                            if(args2.get(0) == label){
+                                code2.setLocation(i);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-
-
-
 
 }
