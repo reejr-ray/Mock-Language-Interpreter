@@ -26,8 +26,8 @@ public class ReturnCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
-        /**
-         * REEEEEEEE
-         */
+        if(!vm.returnAddrIsEmpty()){
+            int returnAddr = vm.popReturnAddr();
+        }
     }
 }

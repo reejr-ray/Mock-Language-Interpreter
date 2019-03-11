@@ -56,6 +56,9 @@ public class VirtualMachine {
             return -1;
         }
     }
+    public boolean returnAddrIsEmpty(){
+        return returnAddrs.isEmpty();
+    }
     public int getCurrentLocation(){ return program.getSize();}
     public void changePc(int i){ this.pc = i;}
     // ------------- ENDOF VIRTUAL MACHINE MANIPULATORS ----------
