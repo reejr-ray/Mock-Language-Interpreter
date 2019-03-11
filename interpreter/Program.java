@@ -40,15 +40,15 @@ public class Program {
                 if (program.get(i).getName().equals("LABEL")) {
 
                     int location = i;
-                    ArrayList<String> args1 = program.get(i).getArgs();
-                    String label = args1.get(0);
+                    String label = program.get(i).getBranchName();
                     for (ByteCode code2 : program) {
                         String name2 = code2.getName(); // saves 2 getName() calls per iteration
                         if(name2.equals("FALSEBRANCH") ||
                                 name2.equals("GOTO") ||
-                                name2.equals("CALL")){
-                            ArrayList<String> args2 = code2.getArgs();
-                            if(args2.get(0) == label){
+                                name2.equals("CALL") ||
+                                name2.equals("RETURN")){
+                            String label2 = code2.getBranchName();
+                            if(label2 == label){
                                 code2.setLocation(i);
                             }
                         }

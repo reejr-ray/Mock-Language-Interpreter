@@ -8,7 +8,6 @@ public class CallCode extends ByteCode {
     private String name;
     private String branchName;
     private int location;
-    private ArrayList<String> arglist;
 
     @Override
     public void init(ArrayList<String> arglist, String className){

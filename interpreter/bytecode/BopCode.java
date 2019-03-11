@@ -6,17 +6,13 @@ import interpreter.VirtualMachine;
 public class BopCode extends ByteCode {
     // ------------ used types of the bytecode ------------------
     private String name;
+    private String operator;
 
-
-    // ------------- LOG OF ARGS -----------------------
-    // keeping a log of args allows for generalized code, even if each init function stores the correct values in their
-    // correct types as seen above. Might be null if bytecode doesnt take arguments. easy checking for labels.
-    private ArrayList<String> arglist;
 
     @Override
     public void init(ArrayList<String> arglist, String className){
         this.name  = className;
-        this.arglist.addAll(arglist);
+        this.operator = arglist.get(0);
     }
 
     @Override
@@ -29,7 +25,7 @@ public class BopCode extends ByteCode {
     @Override
     public void execute(VirtualMachine vm){
         /**
-         * REEEEEEEE
+         * REEEEEEEE GROSS FUNCTION MY EYES BURN!
          */
     }
 }

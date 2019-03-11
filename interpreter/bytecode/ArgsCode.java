@@ -7,17 +7,20 @@ public class ArgsCode extends ByteCode {
 
     // ------------ used types of the bytecode ------------------
     private String name;
+    private int numArgs;
 
 
-    // ------------- LOG OF ARGS -----------------------
-    // keeping a log of args allows for generalized code, even if each init function stores the correct values in their
-    // correct types as seen above. Might be null if bytecode doesnt take arguments. easy checking for labels.
-    private ArrayList<String> arglist;
 
     @Override
     public void init(ArrayList<String> arglist, String className){
         this.name  = className;
-        this.arglist.addAll(arglist);
+        String number = arglist.get(0);
+        try {
+            this.numArgs = Integer.parseInt(number);
+        } catch (NumberFormatException nfe){
+            System.out.println(" Error: Cannot parse " + number + " as a number in ArgsCode.java. \n");
+        }
+
     }
 
     @Override

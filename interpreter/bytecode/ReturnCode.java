@@ -6,17 +6,15 @@ import interpreter.VirtualMachine;
 public class ReturnCode extends ByteCode {
     // ------------ used types of the bytecode ------------------
     private String name;
-
-
-    // ------------- LOG OF ARGS -----------------------
-    // keeping a log of args allows for generalized code, even if each init function stores the correct values in their
-    // correct types as seen above. Might be null if bytecode doesnt take arguments. easy checking for labels.
-    private ArrayList<String> arglist;
+    private String branchName;
+    private int location;
 
     @Override
     public void init(ArrayList<String> arglist, String className){
         this.name  = className;
-        this.arglist.addAll(arglist);
+        if(!arglist.isEmpty()){
+            this.branchName = arglist.get(0);
+        }
     }
 
     @Override

@@ -8,16 +8,10 @@ public class LabelCode extends ByteCode {
     private String name;
     private String label;
 
-
-    // ------------- LOG OF ARGS -----------------------
-    // keeping a log of args allows for generalized code, even if each init function stores the correct values in their
-    // correct types as seen above. Might be null if bytecode doesnt take arguments. easy checking for labels.
-    private ArrayList<String> arglist;
-
     @Override
     public void init(ArrayList<String> arglist, String className){
         this.name  = className;
-        this.arglist.addAll(arglist);
+        this.label = arglist.get(0);
     }
 
     @Override

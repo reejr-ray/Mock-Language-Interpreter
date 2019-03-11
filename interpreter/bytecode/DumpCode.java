@@ -6,17 +6,17 @@ import interpreter.VirtualMachine;
 public class DumpCode extends ByteCode {
     // ------------ used types of the bytecode ------------------
     private String name;
-
-
-    // ------------- LOG OF ARGS -----------------------
-    // keeping a log of args allows for generalized code, even if each init function stores the correct values in their
-    // correct types as seen above. Might be null if bytecode doesnt take arguments. easy checking for labels.
-    private ArrayList<String> arglist;
+    private boolean dumpState;
 
     @Override
     public void init(ArrayList<String> arglist, String className){
         this.name  = className;
-        this.arglist.addAll(arglist);
+        String state = arglist.get(0);
+        if(state == "ON"){
+            this.dumpState = true;
+        } else if(state == "OFF"){
+            this.dumpState = false;
+        }
     }
 
     @Override

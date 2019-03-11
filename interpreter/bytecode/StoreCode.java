@@ -6,17 +6,23 @@ import interpreter.VirtualMachine;
 public class StoreCode extends ByteCode{
     // ------------ used types of the bytecode ------------------
     private String name;
-
-
-    // ------------- LOG OF ARGS -----------------------
-    // keeping a log of args allows for generalized code, even if each init function stores the correct values in their
-    // correct types as seen above. Might be null if bytecode doesnt take arguments. easy checking for labels.
-    private ArrayList<String> arglist;
-
+    private String variable;
+    private int value;
     @Override
     public void init(ArrayList<String> arglist, String className){
         this.name  = className;
-        this.arglist.addAll(arglist);
+        String number = arglist.get(0);
+
+        try {
+            this.value = Integer.parseInt(number);
+        } catch (NumberFormatException nfe){
+            System.out.println(" Error: Cannot parse " + number + " as a number in StoreCode.java. \n");
+        }
+        if(arglist.size() > 1){
+            this.variable = arglist.get(1);
+        } else {
+            this.variable = "x";
+        }
     }
 
     @Override
