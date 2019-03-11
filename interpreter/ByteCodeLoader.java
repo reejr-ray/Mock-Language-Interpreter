@@ -35,7 +35,6 @@ public class ByteCodeLoader extends Object {
         try {
 
             String line = byteSource.readLine();
-            // ArrayList<ByteCode> instructions = new ArrayList<>();
             while (line != null) { // until EOF
                 String[] args = line.split("\\s+");
                 try {
@@ -56,13 +55,6 @@ public class ByteCodeLoader extends Object {
 
                     // add initialized bytecode into the program
                     program.addByteCode(bCode);
-
-                    // add each initialized bytecode into an arraylist for passing to program
-                    // instructions.add(bCode);
-
-                    /** ---------------- IMPORTANT TODO -------------------------
-                     * with the initialized bytecode, put it into the program
-                     */
 
                 } catch (ClassNotFoundException cnf) {
                     System.out.println(" No such class exists for code " + args[0] + ". ");

@@ -1,6 +1,7 @@
 package interpreter.bytecode;
 
 import java.util.ArrayList;
+import interpreter.VirtualMachine;
 
 public class WriteCode extends ByteCode {
     // ------------ used types of the bytecode ------------------
@@ -26,15 +27,7 @@ public class WriteCode extends ByteCode {
     public void setLocation(int i){} //intentionally blank. see ByteCode.java for more info
 
     @Override
-    public ArrayList<String> getArgs(){ return this.arglist; }
-    @Override
-    public void setArgs(ArrayList<String> myList){
-        // is this a problem? shallow copy or works fine?
-        this.arglist = myList;
-    }
-
-    @Override
-    public void execute(){
+    public void execute(VirtualMachine vm){
         /**
          * REEEEEEEE
          */

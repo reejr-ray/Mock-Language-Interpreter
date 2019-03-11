@@ -1,6 +1,7 @@
 package interpreter.bytecode;
 
 import java.util.ArrayList;
+import interpreter.VirtualMachine;
 
 public class FalseBranchCode extends ByteCode {
 
@@ -23,16 +24,7 @@ public class FalseBranchCode extends ByteCode {
     public void setLocation(int i){ this.location = i; }
 
     @Override
-    public ArrayList<String> getArgs(){ return this.arglist; }
-    @Override
-    public void setArgs(ArrayList<String> myList){
-        // is this a problem? shallow copy or works fine?
-        this.arglist = myList;
-    }
-
-
-    @Override
-    public void execute(){
+    public void execute(VirtualMachine vm){
         /**
          * REEEEEEEE
          */

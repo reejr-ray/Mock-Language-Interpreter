@@ -86,6 +86,9 @@ public class RunTimeStack {
         runTimeStack.add(val);
         return val;
     }
+    public int getStackSize(){
+        return runTimeStack.size();
+    }
 
 
     
