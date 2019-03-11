@@ -24,8 +24,6 @@ public class GotoCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
-        /**
-         * REEEEEEEE
-         */
+        vm.changePc(location);
     }
 }

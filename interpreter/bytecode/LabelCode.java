@@ -23,7 +23,5 @@ public class LabelCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
-        /**
-         * REEEEEEEE
-         */
+        // free execute yay
     }}

@@ -27,9 +27,13 @@ public class RunTimeStack {
     public int pop(){
         if(!runTimeStack.isEmpty()) {
             int index = runTimeStack.size() - 1;
-            int top = runTimeStack.get(index);
-            runTimeStack.remove(index);
-            return top;
+            if(index > framePointer.peek()) {
+                int top = runTimeStack.get(index);
+                runTimeStack.remove(index);
+                return top;
+            } else {
+                return -1;
+            }
         } else {
             return -1;
         }

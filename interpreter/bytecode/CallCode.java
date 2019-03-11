@@ -24,8 +24,8 @@ public class CallCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
-        /**
-         * REEEEEEEE
-         */
+        int retAddr = vm.getCurrentLocation();
+        vm.pushReturnAddr(retAddr);
+        vm.changePc(location);
     }
 }

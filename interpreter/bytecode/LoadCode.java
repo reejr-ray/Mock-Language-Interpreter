@@ -35,8 +35,6 @@ public class LoadCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
-        /**
-         * REEEEEEEE
-         */
+        vm.loadRunStack(value);
     }
 }

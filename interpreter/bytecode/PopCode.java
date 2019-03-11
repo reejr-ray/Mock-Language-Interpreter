@@ -23,8 +23,8 @@ public class PopCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
-        /**
-         * REEEEEEEE
-         */
+        while (levels > 0){
+            vm.popRunStack();
+        }
     }
 }
